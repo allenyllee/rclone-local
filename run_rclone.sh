@@ -13,7 +13,7 @@ MOUNTPOINT_CONFIG="$(pwd)/rclone"
 # mkdir -p $MOUNTPOINT/gdrive
 
 docker run -ti -d \
-    --name rclone-gdrive \
+    --name rclone-local \
     --restart=always \
     --log-opt max-size=10m \
     --log-opt max-file=10 \
