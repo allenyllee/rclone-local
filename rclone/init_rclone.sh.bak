@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+echo $@
+
+trap cleanup SIGINT
+trap cleanup SIGTERM
+trap cleanup SIGKILL
+
+function cleanup() {
+    echo "** cleanup"
+    umount /data/gDrive
+    fusermount -u /data/gDrive
+    umount -l /data/gDrive
+}
+
+cleanup
+
+mkdir -p /data/gDrive
+
+/usr/local/bin/rclone mount gCache: /data/gDrive \
+    --cache-dir /rclone/cache \
+    --allow-other \
+    --allow-non-empty \
+    --drive-chunk-size 16M \
+    --timeout 10s \
+    --vfs-cache-mode writes \
+    --vfs-cache-max-age 336h \
+    --fast-list \
+    --buffer-size 64M \
+    --tpslimit 10 \
+    --tpslimit-burst 20 \
+    --use-mmap \
+    --contimeout 3s \
+    --attr-timeout 5s \
+    -v
+
+# Wait
+wait $!
+
+#Cleanup
+cleanup
+
+$@
