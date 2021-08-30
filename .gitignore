@@ -1,7 +1,8 @@
 .history/
 .lh/
-/rclone/cache
-/rclone/cache-backend
-/rclone/log
-/rclone/tmp
+rclone/cache
+rclone/cache-backend
+rclone/log
+rclone/tmp
+.env
 rclone/config/rclone.conf

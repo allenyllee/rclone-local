@@ -1,0 +1,48 @@
+[gDrive]
+type = drive
+# client_id =
+# client_secret =
+scope = drive
+root_folder_id =
+token =
+# force Download Abusive File
+acknowledge_abuse = true
+chunk_size = 32M
+team_drive =
+
+[gCache]
+type = cache
+remote = gDrive:
+chunk_size = 768k
+info_age = 1M
+chunk_total_size = 120G
+# tmp_upload_path = /rclone/tmp/gCache
+writes = false
+db_path = /rclone/cache-backend
+chunk_path = /rclone/cache-backend
+workers = 12
+read_retries = 1
+db_purge = false
+rps = 8
+
+[pDrive]
+type = pcloud
+root_folder_id =
+hostname = api.pcloud.com
+token =
+
+[pCache]
+type = cache
+remote = pDrive:
+chunk_size = 768k
+info_age = 1M
+chunk_total_size = 120G
+# tmp_upload_path = /rclone/tmp/pCache
+writes = false
+db_path = /rclone/cache-backend
+chunk_path = /rclone/cache-backend
+workers = 12
+read_retries = 1
+db_purge = false
+rps = 8
+
