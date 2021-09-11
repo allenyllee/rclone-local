@@ -49,8 +49,8 @@ mkdir -p /data/pDrive
         --log-file /dev/stdout \
         --bwlimit "09:00,512k:off 23:00,off:off" \
         --bwlimit-file off:off \
-        --tpslimit 2 \
-        --tpslimit-burst 4 \
+        --tpslimit 4 \
+        --tpslimit-burst 8 \
         --track-renames \
         --fast-list \
         --config /config/rclone/rclone.conf \
