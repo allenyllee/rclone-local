@@ -6,11 +6,21 @@ services:
     volumes:
       - $MOUNTPOINT_CONFIG:/rclone
       - $MOUNTPOINT_CONFIG/config:/config/rclone
-      - $MOUNTPOINT:/data:shared
+      # - $MOUNTPOINT:/data:shared
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      # https://rclone.org/install/#install-with-docker
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      # https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes
+      # https://docs.docker.com/storage/bind-mounts/#configure-bind-propagation
+      - type: bind
+        source: $MOUNTPOINT
+        target: /data
+        bind:
+          propagation: shared
     devices:
-      - "/dev/fuse:/dev/fuse"
+      - /dev/fuse:/dev/fuse
     cap_add:
       - SYS_ADMIN
     security_opt:
